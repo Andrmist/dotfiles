@@ -1,0 +1,11 @@
+#+TITLE:Qugalet Dotfiles
+#+AUTHOR:Qugalet
+
+* Dotfiles for personal use
+*DO NOT PUBLISH THIS REPOSITORY IN PUBLIC GIT HOSTING*
+
+Really, don't do this. This may end so bad.
+** Usage
+#+BEGIN_SRC shell
+stow -d directory 
+#+END_SRC

@@ -94,8 +94,12 @@
   :config
   (global-set-key "\C-s" 'swiper))
 
+(straight-use-package 'project)
+
 (use-package magit
-  :straight t)
+  :straight t 
+  :init (if (not (boundp 'project-switch-commands)) 
+	    (setq project-switch-commands nil)))
 
 (use-package dash
   :straight t)
@@ -157,7 +161,11 @@
   :bind
   ("C-;" . 'smart-comment))
 
+(use-package vterm
+    :straight t)
+
 ;; Simple cpp compile macros
+
 (defun code-compile ()
   (interactive)
   (unless (file-exists-p "Makefile")
@@ -204,7 +212,7 @@
   :init
   (load-theme 'atom-one-dark t))
 
-(setq fontt "Iosevka 12")
+(setq fontt "Iosevka 14")
 
 (set-frame-font fontt nil t)
 (add-to-list 'default-frame-alist '(font . fontt))
