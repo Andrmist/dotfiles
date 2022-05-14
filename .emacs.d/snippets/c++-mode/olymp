@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: olymp
+# key: olymp
+# --
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    $0
+}

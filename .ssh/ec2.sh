@@ -1,0 +1,1 @@
+ssh -i "ApelSYN.pem" centos@ec2-16-171-67-28.eu-north-1.compute.amazonaws.com
