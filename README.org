@@ -1,5 +1,3 @@
-#+TITLE:Qugalet Dotfiles
-#+AUTHOR:Qugalet
 
 * Dotfiles for personal use
 *DO NOT PUBLISH THIS REPOSITORY IN PUBLIC GIT HOSTING*
