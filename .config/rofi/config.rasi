@@ -1,0 +1,4 @@
+configuration {
+    modi: "combi,drun,run,window";
+    combi-modi: "drun,window";
+}

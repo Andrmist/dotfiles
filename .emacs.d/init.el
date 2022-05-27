@@ -7,8 +7,10 @@
 ;; \____/\_|  |_/\_| |_/\____/\____/    config :-)
 
 ;; Disabling useless and enablng useful things
-
 ;;; Code:
+;; Lower threshold back to 8 MiB (default is 800kB)
+(setq gc-cons-threshold (* 50 1000 1000))
+
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -20,10 +22,6 @@
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
-;; Lower threshold back to 8 MiB (default is 800kB)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (expt 2 23))))
 
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -215,7 +213,7 @@
 (setq fontt "Iosevka 14")
 
 (set-frame-font fontt nil t)
-(add-to-list 'default-frame-alist '(font . fontt))
+(add-to-list 'default-frame-alist '(font . "Iosevka 14"))
 ;; (set-face-attribute 'mode-line nil :font "Fira Code 10")
 
 ;; Org-mode settings and packages
@@ -449,3 +447,4 @@ Return the errors parsed with the error patterns of CHECKER."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(setq gc-cons-threshold (* 2 1000 1000))
