@@ -1,0 +1,47 @@
+---
+- name: Add new Wireguard client to server 
+  hosts: vpn
+  become: true
+  vars_files:
+    - vars/wireguard.yml
+  tasks:
+    - name: Get public IP
+      ipify_facts:
+      register: public_ip
+
+    - debug:
+        msg: "{{public_ip}}"
+
+    - name: Copy client configuration generator if doesn't exists
+      copy: 
+        src: wg-user.sh
+        dest: /usr/bin/wg-user
+        force: no
+        mode: +x
+    
+    - name: Add new client
+      shell: "wg-user 192.168.1. {{public_ip}}:{{wireguard_port}} {{wireguard_ip_number}} {{wireguard_peer_name}}"
+      args:
+        chdir: /tmp
+    
+    - name: Fetch configuration
+      fetch:
+        src: "/tmp/{{wireguard_peer_name}}.conf"
+        dest: /tmp/wg0.conf
+
+- name: Install and enable Wireguard settings
+  hosts: vm
+  become: true
+  tasks:
+    - name: Copy Wireguard configuration
+      copy:
+        src: /tmp/wg0.conf
+        dest: /etc/wireguard/wg0.conf
+        mode: 600
+    
+    - name: Enable Wireguard connection and start it 
+      systemd:
+        name: wg-quick@wg0
+        enabled: true
+        state: started
+

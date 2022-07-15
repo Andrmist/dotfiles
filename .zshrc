@@ -108,6 +108,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # source /home/master/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#
+
+# rsync aliases
+
+alias deploy-rpz-login-dev="rsync --archive --verbose --progress ./target/RPZLogin-1.0-SNAPSHOT.jar root@192.168.1.22:/var/lib/pterodactyl/data/012ebb34-410d-4aae-87db-8b856c4641b7/plugins"
+alias deploy-rpz-chat-dev="rsync --archive --verbose --progress ./target/RPZChat-1.0.jar root@192.168.1.22:/var/lib/pterodactyl/data/012ebb34-410d-4aae-87db-8b856c4641b7/plugins"
+alias deploy-rpz-bot="rsync --archive --verbose --progress ~/work/rpz_bot/ root@192.168.1.22:/var/lib/pterodactyl/data/de1568ce-fcc6-4e84-ac93-a65f1beec96c/"
 
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -142,6 +149,10 @@ vterm_printf(){
     fi
 }
 
+# emacs
+export EDITOR="emacsclient -t"                  # $EDITOR opens in terminal
+export VISUAL="emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+
 # nnn config
 trap nnn_cd EXIT
 
@@ -162,7 +173,17 @@ eval $(thefuck --alias)
 echo
 neofetch --config ~/.config/neofetch/small.conf
 alias lst="ls -ahlt"
-alias lastf="ls -ahlt | head -10"
+alias lastf="ls -ahlt --color=always | head -10"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# pnpm
+export PNPM_HOME="/home/master/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+# Bun
+export BUN_INSTALL="/home/master/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+alias bun='sde -chip-check-disable -- bun'

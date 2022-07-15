@@ -17,8 +17,29 @@
 (scroll-bar-mode -1)
 (show-paren-mode 1)
 (setq-default cursor-type 'bar)
+
+;; line numbers
 (global-display-line-numbers-mode)
-(if window-system (global-hl-line-mode t))
+(require 'display-line-numbers)
+
+(defcustom display-line-numbers-exempt-modes
+  '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
+  "Major modes on which to disable line numbers."
+  :group 'display-line-numbers
+  :type 'list
+  :version "green")
+
+(defun display-line-numbers--turn-on ()
+  "Turn on line numbers except for certain major modes.
+Exempt major modes are defined in `display-line-numbers-exempt-modes'."
+  (unless (or (minibufferp)
+              (member major-mode display-line-numbers-exempt-modes))
+    (display-line-numbers-mode)))
+
+(global-display-line-numbers-mode)
+
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+(global-hl-line-mode t)
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -135,7 +156,7 @@
   ;; Set the title
   (setq dashboard-banner-logo-title "Welcome back, S-Sempai (✿◠‿◠)")
   ;; Set the banner
-  (setq dashboard-startup-banner "~/.emacs.d/icon_3.png")
+  (setq dashboard-startup-banner "~/.emacs.d/icon_resized.png")
 
   (setq dashboard-center-content t)
   ;; (setq show-week-agenda-p t)
@@ -160,7 +181,10 @@
   ("C-;" . 'smart-comment))
 
 (use-package vterm
-    :straight t)
+  :straight t)
+
+(use-package restart-emacs
+  :straight t)
 
 ;; Simple cpp compile macros
 
@@ -210,7 +234,7 @@
   :init
   (load-theme 'atom-one-dark t))
 
-(setq fontt "Iosevka 14")
+(setq fontt "Iosevka 16")
 
 (set-frame-font fontt nil t)
 (add-to-list 'default-frame-alist '(font . "Iosevka 14"))
@@ -234,6 +258,7 @@
 
 (setq org-fast-tag-selection-single-key t)
 (setq org-use-fast-todo-selection t)
+(setq org-image-actual-width nil)
 
 (setq org-use-speed-commands t)
 (org-babel-do-load-languages
@@ -280,40 +305,6 @@
       time-stamp-end "$"
       time-stamp-format "%04Y-%02m-%02d")
 (add-hook 'before-save-hook 'time-stamp nil)
-
-;;   (setq org-journal-file-format "%d.%m.%Y.org"))
-
-;; (use-package org-roam
-;;   :straight t
-;;   :init
-;;   (setq org-roam-v2-ack t)
-;;   :custom
-;;   (org-roam-directory (file-truename "~/work/wtd/resources"))
-;;   (org-roam-db-update-method "immediate")
-;;   :bind (("C-c n l" . org-roam-buffer-toggle)
-;;          ("C-c n f" . org-roam-node-find)
-;;          ("C-c n g" . org-roam-graph)
-;;          ("C-c n i" . org-roam-node-insert)
-;;          ("C-c n c" . org-roam-capture)
-;;          ;; Dailies
-;;          ("C-c n j" . org-roam-dailies-capture-today)
-;; 	 ("C-c d t" . org-roam-dailies-find-today)
-;; 	 ("C-c d d" . org-roam-dailies-find-date)
-;; 	 :map org-mode-map
-;; 	 ("C-M-i" . completion-at-point))
-;;   :config
-;;   (setq org-roam-dailies-directory "~/work/wtd/notes")
-;;   (setq org-roam-dailies-capture-templates
-;;         '(("j" "journal" entry  "* %<%H:%M> %?"
-;; 	  :if-new (file+head "%(concat org-roam-dailies-directory \"/%<%Y-%m-%d>.org\")"
-;; 			     "#+title: %<%Y-%m-%d (%A)>\n#+startup: showall\n")
-;;           :head "#+title: %<%Y-%m-%d (%A)>\n#+startup: showall\n"
-;; 	  :unarrowed t)))
-;;   (setq org-roam-db-location "~/work/wtd/resources/roam.db")
-;;   (setq org-roam-completion-everywhere t)
-;;   (org-roam-db-autosync-mode)
-;;   ;; If using org-roam-protocol
-;;   (require 'org-roam-protocol))
 
 ;; Python setup
 
@@ -384,6 +375,9 @@ Return the errors parsed with the error patterns of CHECKER."
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
+(use-package json-mode
+  :straight t)
+
 ;; Rust
 
 (use-package rust-mode
@@ -410,6 +404,7 @@ Return the errors parsed with the error patterns of CHECKER."
 (use-package yaml-mode
   :straight t
   :mode ("\\.yml\\'"))
+
 
 
 ;; emacs customize shit

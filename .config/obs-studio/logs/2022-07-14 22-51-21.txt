@@ -1,0 +1,110 @@
+22:51:21.808: CPU Name: Intel(R) Core(TM) i7-3630QM CPU @ 2.40GHz
+22:51:21.808: CPU Speed: 2400.000MHz
+22:51:21.809: Physical Cores: 4, Logical Cores: 8
+22:51:21.809: Physical Memory: 7907MB Total, 3926MB Free
+22:51:21.809: Kernel Version: Linux 5.15.48-1-lts
+22:51:21.809: Distribution: "Arch Linux" Unknown
+22:51:21.809: Session Type: x11
+22:51:21.809: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.21.1
+22:51:21.810: Qt Version: 5.15.5 (runtime), 5.15.2 (compiled)
+22:51:21.810: Portable mode: false
+22:51:21.878: OBS 27.2.0-8-g608e57257 (linux)
+22:51:21.878: ---------------------------------
+22:51:21.878: ---------------------------------
+22:51:21.878: audio settings reset:
+22:51:21.878: 	samples per sec: 48000
+22:51:21.878: 	speakers:        2
+22:51:21.894: ---------------------------------
+22:51:21.894: Initializing OpenGL...
+22:51:21.988: Loading up OpenGL on adapter AMD AMD Radeon HD 7800M Series (verde, LLVM 13.0.1, DRM 3.42, 5.15.48-1-lts)
+22:51:21.989: OpenGL loaded successfully, version 4.6 (Core Profile) Mesa 22.1.1, shading language 4.60
+22:51:22.013: ---------------------------------
+22:51:22.013: video settings reset:
+22:51:22.013: 	base resolution:   1920x1080
+22:51:22.013: 	output resolution: 1920x1080
+22:51:22.013: 	downscale filter:  Bicubic
+22:51:22.013: 	fps:               60/1
+22:51:22.013: 	format:            NV12
+22:51:22.013: 	YUV mode:          709/Partial
+22:51:22.013: NV12 texture support not available
+22:51:22.014: Audio monitoring device:
+22:51:22.014: 	name: За замовчуванням
+22:51:22.014: 	id: default
+22:51:22.014: ---------------------------------
+22:51:22.023: Failed to load 'en-US' text for module: 'decklink-captions.so'
+22:51:22.036: Failed to load 'en-US' text for module: 'decklink-ouput-ui.so'
+22:51:22.284: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+22:51:22.284: No blackmagic support
+22:51:22.313: v4l2loopback not installed, virtual camera disabled
+22:51:22.334: [obs-browser]: Version 2.17.10
+22:51:22.334: [obs-browser]: CEF Version 95.0.0-MediaHandler.2463+g3b3ac84+chromium-95.0.4638.69
+22:51:22.394: NVENC supported
+22:51:22.394: FFMPEG VAAPI supported
+22:51:22.429: ---------------------------------
+22:51:22.429:   Loaded Modules:
+22:51:22.429:     text-freetype2.so
+22:51:22.429:     rtmp-services.so
+22:51:22.429:     obs-x264.so
+22:51:22.429:     obs-vst.so
+22:51:22.429:     obs-transitions.so
+22:51:22.429:     obs-outputs.so
+22:51:22.429:     obs-libfdk.so
+22:51:22.429:     obs-filters.so
+22:51:22.429:     obs-ffmpeg.so
+22:51:22.429:     obs-browser.so
+22:51:22.429:     linux-v4l2.so
+22:51:22.429:     linux-pulseaudio.so
+22:51:22.429:     linux-jack.so
+22:51:22.429:     linux-decklink.so
+22:51:22.429:     linux-capture.so
+22:51:22.429:     linux-alsa.so
+22:51:22.429:     image-source.so
+22:51:22.429:     frontend-tools.so
+22:51:22.429:     decklink-ouput-ui.so
+22:51:22.429:     decklink-captions.so
+22:51:22.429: ---------------------------------
+22:51:22.429: ==== Startup complete ===============================================
+22:51:22.469: All scene data cleared
+22:51:22.469: ------------------------------------------------
+22:51:22.474: pulse-input: Server name: 'PulseAudio (on PipeWire 0.3.52) 15.0.0'
+22:51:22.474: pulse-input: Audio format: s16le, 48000 Hz, 2 channels
+22:51:22.474: pulse-input: Started recording from 'alsa_output.usb-Sennheiser_Sennheiser_3D_G4ME1-00.analog-stereo.monitor'
+22:51:22.474: [Loaded global audio device]: 'Пристрій відтворення'
+22:51:22.474: pulse-input: Server name: 'PulseAudio (on PipeWire 0.3.52) 15.0.0'
+22:51:22.475: pulse-input: Audio format: s16le, 48000 Hz, 2 channels
+22:51:22.475: pulse-input: Started recording from 'alsa_input.usb-Sennheiser_Sennheiser_3D_G4ME1-00.analog-stereo'
+22:51:22.475: [Loaded global audio device]: 'Мікрофон/Aux'
+22:51:22.475:     - filter: 'Подавлення шуму' (noise_suppress_filter_v2)
+22:51:22.476: xshm-input: Geometry 1920x1080 @ 0,0
+22:51:22.487: xshm-input: failed to update geometry !
+22:51:22.533: Switched to scene 'demo'
+22:51:22.533: ------------------------------------------------
+22:51:22.533: Loaded scenes:
+22:51:22.533: - scene 'Сцена':
+22:51:22.533:     - source: 'Захоплення вікна (Xcomposite)' (xcomposite_input)
+22:51:22.533:     - source: 'Браузер' (browser_source)
+22:51:22.533: - scene 'demo':
+22:51:22.536:     - source: 'Захоплення екрану (XSHM)' (xshm_input)
+22:51:22.536:     - source: 'Захоплення екрану (XSHM) 2' (xshm_input)
+22:51:22.536: ------------------------------------------------
+22:51:23.030: [rtmp-services plugin] Successfully updated file 'services.json' (version 201)
+22:51:23.030: [rtmp-services plugin] Successfully updated package (version 201)
+22:51:23.060: adding 42 milliseconds of audio buffering, total audio buffering is now 42 milliseconds (source: Пристрій відтворення)
+22:51:23.060: 
+22:51:23.081: adding 21 milliseconds of audio buffering, total audio buffering is now 64 milliseconds (source: Мікрофон/Aux)
+22:51:23.081: 
+22:51:34.372: ---------------------------------
+22:51:34.372: [FFMPEG VAAPI encoder: 'streaming_h264'] settings:
+22:51:34.372: 	device:       /dev/dri/by-path/pci-0000:01:00.0-render
+22:51:34.372: 	rate_control: CBR
+22:51:34.372: 	profile:      578
+22:51:34.372: 	level:        -99
+22:51:34.372: 	qp:           0
+22:51:34.372: 	bitrate:      2500
+22:51:34.372: 	maxrate:      2500
+22:51:34.372: 	keyint:       120
+22:51:34.372: 	width:        1920
+22:51:34.372: 	height:       1080
+22:51:34.372: 	b-frames:     0
+22:51:34.372: 
+22:51:34.385: [FFMPEG VAAPI encoder: 'streaming_h264'] Failed to open VAAPI codec: Функцію не реалізовано

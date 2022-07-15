@@ -1,0 +1,6 @@
+[external]
+vm ansible_host=192.168.122.134 ansible_user=master 
+
+[home]
+BlackBoxServer ansible_host=77.222.158.232 ansible_port=2225 ansible_user=root
+vpn ansible_host=77.222.158.232 ansible_port=2225 ansible_user=root

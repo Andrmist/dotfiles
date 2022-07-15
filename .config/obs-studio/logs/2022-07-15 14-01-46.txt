@@ -1,0 +1,142 @@
+14:01:46.548: CPU Name: Intel(R) Core(TM) i7-3630QM CPU @ 2.40GHz
+14:01:46.548: CPU Speed: 3400.000MHz
+14:01:46.549: Physical Cores: 4, Logical Cores: 8
+14:01:46.549: Physical Memory: 7907MB Total, 538MB Free
+14:01:46.549: Kernel Version: Linux 5.15.54-1-lts
+14:01:46.549: Distribution: "Arch Linux" Unknown
+14:01:46.549: Session Type: x11
+14:01:46.549: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.21.1
+14:01:46.550: Qt Version: 5.15.5 (runtime), 5.15.2 (compiled)
+14:01:46.550: Portable mode: false
+14:01:46.615: OBS 27.2.0-8-g608e57257 (linux)
+14:01:46.615: ---------------------------------
+14:01:46.616: ---------------------------------
+14:01:46.616: audio settings reset:
+14:01:46.616: 	samples per sec: 48000
+14:01:46.616: 	speakers:        2
+14:01:46.626: ---------------------------------
+14:01:46.626: Initializing OpenGL...
+14:01:46.730: Loading up OpenGL on adapter AMD AMD Radeon HD 7800M Series (verde, LLVM 14.0.6, DRM 3.42, 5.15.54-1-lts)
+14:01:46.730: OpenGL loaded successfully, version 4.6 (Core Profile) Mesa 22.1.3, shading language 4.60
+14:01:46.749: ---------------------------------
+14:01:46.749: video settings reset:
+14:01:46.749: 	base resolution:   1920x1080
+14:01:46.749: 	output resolution: 1920x1080
+14:01:46.749: 	downscale filter:  Bicubic
+14:01:46.749: 	fps:               60/1
+14:01:46.749: 	format:            NV12
+14:01:46.749: 	YUV mode:          709/Partial
+14:01:46.749: NV12 texture support not available
+14:01:46.750: Audio monitoring device:
+14:01:46.750: 	name: Default
+14:01:46.750: 	id: default
+14:01:46.750: ---------------------------------
+14:01:46.752: Failed to load 'en-US' text for module: 'decklink-captions.so'
+14:01:46.754: Failed to load 'en-US' text for module: 'decklink-ouput-ui.so'
+14:01:46.809: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+14:01:46.809: No blackmagic support
+14:01:46.822: v4l2loopback not installed, virtual camera disabled
+14:01:46.825: [obs-browser]: Version 2.17.10
+14:01:46.825: [obs-browser]: CEF Version 95.0.0-MediaHandler.2463+g3b3ac84+chromium-95.0.4638.69
+14:01:46.833: NVENC supported
+14:01:46.833: FFMPEG VAAPI supported
+14:01:46.845: ---------------------------------
+14:01:46.846:   Loaded Modules:
+14:01:46.846:     text-freetype2.so
+14:01:46.846:     rtmp-services.so
+14:01:46.846:     obs-x264.so
+14:01:46.846:     obs-vst.so
+14:01:46.846:     obs-transitions.so
+14:01:46.846:     obs-outputs.so
+14:01:46.846:     obs-libfdk.so
+14:01:46.846:     obs-filters.so
+14:01:46.846:     obs-ffmpeg.so
+14:01:46.846:     obs-browser.so
+14:01:46.846:     linux-v4l2.so
+14:01:46.846:     linux-pulseaudio.so
+14:01:46.846:     linux-jack.so
+14:01:46.846:     linux-decklink.so
+14:01:46.846:     linux-capture.so
+14:01:46.846:     linux-alsa.so
+14:01:46.846:     image-source.so
+14:01:46.846:     frontend-tools.so
+14:01:46.846:     decklink-ouput-ui.so
+14:01:46.846:     decklink-captions.so
+14:01:46.846: ---------------------------------
+14:01:46.846: ==== Startup complete ===============================================
+14:01:46.869: All scene data cleared
+14:01:46.869: ------------------------------------------------
+14:01:46.875: pulse-input: Server name: 'PulseAudio (on PipeWire 0.3.55) 15.0.0'
+14:01:46.875: pulse-input: Audio format: s16le, 48000 Hz, 2 channels
+14:01:46.875: pulse-input: Started recording from 'alsa_output.usb-Sennheiser_Sennheiser_3D_G4ME1-00.analog-stereo.monitor'
+14:01:46.875: [Loaded global audio device]: 'Пристрій відтворення'
+14:01:46.876: pulse-input: Server name: 'PulseAudio (on PipeWire 0.3.55) 15.0.0'
+14:01:46.876: pulse-input: Audio format: s16le, 48000 Hz, 2 channels
+14:01:46.876: pulse-input: Started recording from 'alsa_input.usb-Sennheiser_Sennheiser_3D_G4ME1-00.analog-stereo'
+14:01:46.876: [Loaded global audio device]: 'Мікрофон/Aux'
+14:01:46.876:     - filter: 'Подавлення шуму' (noise_suppress_filter_v2)
+14:01:46.877: xshm-input: failed to update geometry !
+14:01:46.895: xshm-input: Geometry 1920x1080 @ 0,0
+14:01:46.898: Switched to scene 'demo'
+14:01:46.898: ------------------------------------------------
+14:01:46.898: Loaded scenes:
+14:01:46.898: - scene 'Сцена':
+14:01:46.898:     - source: 'Захоплення вікна (Xcomposite)' (xcomposite_input)
+14:01:46.898:     - source: 'Браузер' (browser_source)
+14:01:46.898: - scene 'demo':
+14:01:46.898:     - source: 'Захоплення екрану (XSHM)' (xshm_input)
+14:01:46.898:     - source: 'Захоплення екрану (XSHM) 2' (xshm_input)
+14:01:46.898: ------------------------------------------------
+14:01:47.439: adding 42 milliseconds of audio buffering, total audio buffering is now 42 milliseconds (source: Пристрій відтворення)
+14:01:47.439: 
+14:01:47.482: adding 21 milliseconds of audio buffering, total audio buffering is now 64 milliseconds (source: Мікрофон/Aux)
+14:01:47.482: 
+14:01:48.493: ---------------------------------
+14:01:48.493: [FFMPEG VAAPI encoder: 'streaming_h264'] settings:
+14:01:48.493: 	device:       /dev/dri/by-path/pci-0000:01:00.0-render
+14:01:48.493: 	rate_control: CBR
+14:01:48.493: 	profile:      578
+14:01:48.493: 	level:        -99
+14:01:48.493: 	qp:           0
+14:01:48.493: 	bitrate:      2500
+14:01:48.493: 	maxrate:      2500
+14:01:48.493: 	keyint:       120
+14:01:48.493: 	width:        1920
+14:01:48.493: 	height:       1080
+14:01:48.493: 	b-frames:     0
+14:01:48.493: 
+14:01:48.510: [FFMPEG VAAPI encoder: 'streaming_h264'] Failed to open VAAPI codec: Function not implemented
+14:02:39.883: Settings changed (outputs)
+14:02:39.883: ------------------------------------------------
+14:02:41.731: ---------------------------------
+14:02:41.731: [FFMPEG VAAPI encoder: 'streaming_h264'] settings:
+14:02:41.731: 	device:       /dev/dri/by-path/pci-0000:01:00.0-render
+14:02:41.731: 	rate_control: CBR
+14:02:41.731: 	profile:      77
+14:02:41.731: 	level:        -99
+14:02:41.731: 	qp:           0
+14:02:41.731: 	bitrate:      2500
+14:02:41.731: 	maxrate:      2500
+14:02:41.731: 	keyint:       120
+14:02:41.731: 	width:        1920
+14:02:41.731: 	height:       1080
+14:02:41.731: 	b-frames:     0
+14:02:41.731: 
+14:02:41.740: [FFMPEG VAAPI encoder: 'streaming_h264'] Failed to open VAAPI codec: Function not implemented
+14:07:37.096: Settings changed (outputs)
+14:07:37.096: ------------------------------------------------
+14:07:38.376: ---------------------------------
+14:07:38.376: [FFMPEG VAAPI encoder: 'recording_h264'] settings:
+14:07:38.376: 	device:       /dev/dri/by-path/pci-0000:01:00.0-render
+14:07:38.376: 	rate_control: CBR
+14:07:38.376: 	profile:      578
+14:07:38.376: 	level:        -99
+14:07:38.376: 	qp:           0
+14:07:38.376: 	bitrate:      2500
+14:07:38.376: 	maxrate:      2500
+14:07:38.376: 	keyint:       120
+14:07:38.376: 	width:        1920
+14:07:38.376: 	height:       1080
+14:07:38.376: 	b-frames:     0
+14:07:38.376: 
+14:07:38.383: [FFMPEG VAAPI encoder: 'recording_h264'] Failed to open VAAPI codec: Function not implemented
