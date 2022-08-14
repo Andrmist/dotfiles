@@ -7,8 +7,8 @@ Defining colors for our bar:
 
 #+BEGIN_SRC conf
   [colors]
-  background = ${xrdb:color0}
-  foreground = ${xrdb:color7}
+  background = ${xrdb:background}
+  foreground = ${xrdb:foreground}
   red = ${xrdb:color1}
   green = ${xrdb:color2}
   yellow = ${xrdb:color3}
@@ -30,7 +30,7 @@ I'm a bit exampler, so I will use "example" as our bar name
     top = true
     offset-x = 0
     radius = 5.0
-    fixed-center = true 
+    fixed-center = false
 
     background = ${colors.background}
     foreground = ${colors.foreground}
@@ -39,8 +39,8 @@ I'm a bit exampler, so I will use "example" as our bar name
     border-top-size = 10
     border-right-size = 10
 
-    padding-right = 21
-    padding-left = 5
+    padding-right = 1
+    padding-left = 2
   ;  padding-right = 8
 
     module-margin-left = 1
@@ -55,19 +55,39 @@ I use Weather icons and "Nerd Font-patched" font
 #+END_SRC
 * Modules position
 #+BEGIN_SRC conf
-  modules-left = date separator i3
-  modules-center = xwindow
-  modules-right = weather separator pulseaudio separator memory separator cpu temperature separator xkeyboard separator
+  modules-left = date separator i3 separator
+  modules-center = player
+  modules-right = weather separator filesystem separator pulseaudio separator memory separator cpu separator wlan separator xkeyboard separator tray
 #+END_SRC
 * Tray setup
 #+BEGIN_SRC conf
-  tray-position = right
+  tray-position = none
   tray-detached = true
   tray-offset-x = -5
   tray-maxsize = 20
 #+END_SRC
 * Modules setup
 #+BEGIN_SRC conf
+
+  [module/tray]
+  type = internal/tray
+
+  [module/pause]
+  type = custom/script
+  exec = "~/.config/eww/scripts/play_status.sh"
+  exec-if = "playerctl status"
+  interval = 0.1
+  click-left = "playerctl play-pause"
+
+  [module/player]
+  type = custom/script
+  exec = "echo $(playerctl metadata xesam:artist) - $(playerctl metadata xesam:title)"
+  format =  <label>
+  label-maxlen = 50 
+  interval = 1
+  exec-if = "playerctl status"
+  # click-left = "eww open music"
+
   [module/system-bluetooth-bluetoothctl]
   type = custom/script
   exec = ~/Documents/scripts/bluetooth.sh
@@ -137,7 +157,7 @@ I use Weather icons and "Nerd Font-patched" font
 
   [module/xwindow]
   type = internal/xwindow
-  label = %title:0:30:...%
+  label = %title:0:20:...%
 
   [module/xkeyboard]
   type = internal/xkeyboard
@@ -284,10 +304,11 @@ I use Weather icons and "Nerd Font-patched" font
 
   [module/wlan]
   type = internal/network
-  interface = wlan0
+  interface = wlp2s0
+  interface-type = wireless
   interval = 3.0
 
-  format-connected = <ramp-signal> NET
+  format-connected = "<ramp-signal> <label-connected> "
   format-connected-underline = #9f78e1
   label-connected = %essid%
 

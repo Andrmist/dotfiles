@@ -25,6 +25,7 @@ exec_always nitrogen --restore &
 #exec conky &
 exec ntfd &
 exec dunst &
+exec birdtray &
 
 #exec_always --no-startup-id ~/.config/polybar/scripts/autoname_workspaces.py
 # Launch polybar
@@ -91,9 +92,11 @@ bindsym $mod+Control+p exec --no-startup-id "rofi-rbw"
 bindsym $mod+Shift+Cyrillic_shorti kill
 bindsym $mod+Shift+q kill
 
-# play/pause media
-bindsym $mod+p exec ~/.config/i3/scripts/pause.sh
-bindsym XF86AudioPlay exec ~/.config/i3/scripts/pause.sh
+# Media controls
+bindsym $mod+p exec "playerctl play-pause"
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioPrev exec "playerctl previous"
+bindsym XF86AudioNext exec "playerctl next"
 
 # bindsym $mod+n exec ~/.config/i3/scripts/nmcli-rofi/nmcli-rofi
 # start dmenu (a program launcher)
@@ -378,5 +381,5 @@ no_focus [window_type="notification"]
 
 workspace $ws4 output DP-1
 workspace $ws4 output DP-1 
-workspace $ws4 gaps inner 0
-workspace $ws4 gaps outer 0
+workspace $ws4 gaps inner 10
+workspace $ws4 gaps outer 10

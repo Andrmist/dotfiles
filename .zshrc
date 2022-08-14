@@ -187,3 +187,12 @@ export PATH="$PNPM_HOME:$PATH"
 export BUN_INSTALL="/home/master/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 alias bun='sde -chip-check-disable -- bun'
+
+# Doom Emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+
+# Alias sudo to doas
+alias sudo='doas'
+
+# bun completions
+[ -s "/home/master/.bun/_bun" ] && source "/home/master/.bun/_bun"
