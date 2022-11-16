@@ -1,1 +1,1 @@
-{"settings":{"bwtest":false,"key":"d5f10062-23ea-4225-b99b-955486894a6e","server":"rtmp://live-server-2.splitstream.io/static","use_auth":false},"type":"rtmp_custom"}
+{"settings":{"bwtest":false,"key":"","server":"rtmp://192.168.1.22/ingest/f041b129-e005-42d0-8d4b-8c6f0f66931e.stream?token=1111","use_auth":false},"type":"rtmp_custom"}

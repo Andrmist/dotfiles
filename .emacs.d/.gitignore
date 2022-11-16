@@ -1,0 +1,13 @@
+#auto-save-list#/
+straight/
+recentf/
+tramp
+transient/
+eln-cache/
+elpy/
+auto-save-list/
+.lsp-session-v1
+.org-id-locations
+%backup%~
+backups/
+bookmarks/

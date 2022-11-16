@@ -36,6 +36,9 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+
 ;; recent files
 (recentf-mode 1)
 (setq recent-max-menu-items 25)
@@ -64,6 +67,31 @@
 (straight-use-package 'use-package)
 
 ;; Basic packages
+
+(use-package char-fold
+  :custom
+  (char-fold-symmetric t)
+  (search-default-mode #'char-fold-to-regexp))
+
+(use-package reverse-im
+  :straight t ; install `reverse-im' using package.el
+  :demand t ; always load it
+  :after char-fold ; but only after `char-fold' is loaded
+  :bind
+  ("M-t" . reverse-im-translate-word) ; fix a word in wrong layout
+  :custom
+  (reverse-im-char-fold t) ; use lax matching
+  (reverse-im-read-char-advice-function #'reverse-im-read-char-include)
+  (reverse-im-input-methods '("ukrainian-computer")) ; translate these methods
+  :config
+  (reverse-im-mode t)) ; turn the mode on
+
+(use-package writeroom-mode
+  :straight t
+  :config
+  (define-key writeroom-mode-map (kbd "C-M-<") #'writeroom-decrease-width)
+  (define-key writeroom-mode-map (kbd "C-M->") #'writeroom-increase-width)
+  (define-key writeroom-mode-map (kbd "C-M-=") #'writeroom-adjust-width))
 
 (use-package company
   :straight t
@@ -137,11 +165,11 @@
   ;; Set the title
   (setq dashboard-banner-logo-title "Welcome back, S-Sempai (✿◠‿◠)")
   ;; Set the banner
-  (setq dashboard-startup-banner "~/.emacs.d/icon_resized.png")
+  (setq dashboard-startup-banner "~/.emacs.d/icon4.png")
 
   (setq dashboard-center-content t)
   ;; (setq show-week-agenda-p t)
-  (setq dashboard-items '((recents . 3)))
+  (setq dashboard-items '((recents . 5) (projects . 5)))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (dashboard-setup-startup-hook)
@@ -205,15 +233,24 @@
 
 
 ;; Font and theme settings
-(use-package gruvbox-theme
+
+(use-package dracula-theme
   :straight t
   :init
-  (load-theme 'gruvbox-dark-soft t))
+  (load-theme 'dracula t))
+
+;; (use-package gruvbox-theme
+;;   :straight t
+;;   :init
+;;   (load-theme 'gruvbox-dark-soft t))
 
 ;; (use-package atom-one-dark-theme
 ;;   :straight t
 ;;   :init
 ;;   (load-theme 'atom-one-dark t))
+
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
 (setq fontt "Iosevka 16")
 
@@ -287,6 +324,15 @@
       time-stamp-format "%04Y-%02m-%02d")
 (add-hook 'before-save-hook 'time-stamp nil)
 
+(use-package org-caldav
+  :straight t
+  :config
+  (setq org-caldav-url "https://cal.m0e.space/qugalet"
+	org-caldav-calendar-id "b1ce1e97-36bc-c583-e9fd-a0eec5fb0a0d"
+	org-caldav-inbox "~/musli_popera/tasks.org"
+	org-caldav-files ("~/musli_popera/musli_popera.org" "~/musli_popera/"))
+  )
+
 ;; Python setup
 
 (use-package elpy
@@ -312,7 +358,7 @@ Return the errors parsed with the error patterns of CHECKER."
 
 ;; JS setup
 
-(use-package tide :straight t)
+;; (use-package tide :straight t)
 (use-package company :straight t
   :config
   (setq company-tooltip-align-annotations t)
@@ -321,26 +367,33 @@ Return the errors parsed with the error patterns of CHECKER."
   (tide-hl-identifier-mode +1)
   )
 
+(use-package tide
+  :straight t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . prettier-js)))
+
 (use-package flycheck :straight t
   :config
   ;; (setq flycheck-check-syntax-automatically "idle-change")
   (setq flycheck-idle-change-delay 1))
-(use-package eglot :straight t
-  :config
-  (add-to-list 'eglot-server-programs '(javascript-mode . ("typescript-language-server")))
-  (add-hook 'javascript-mode-hook 'eglot-ensure))
+;; (use-package eglot :straight t
+;;   :config
+;;   (add-to-list 'eglot-server-programs '(javascript-mode . ("typescript-language-server")))
+;;   (add-hook 'javascript-mode-hook 'eglot-ensure))
 
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
+;; (defun setup-tide-mode ()
+;;   (interactive)
+;;   (tide-setup)
+;;   (flycheck-mode +1)
+;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+;;   (eldoc-mode +1)
+;;   (tide-hl-identifier-mode +1)
+;;   ;; company is an optional dependency. You have to
+;;   ;; install it separately via package-install
+;;   ;; `M-x package-install [ret] company`
+;;   (company-mode +1))
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -352,8 +405,8 @@ Return the errors parsed with the error patterns of CHECKER."
 ;; formats the buffer before saving
 ;; (add-hook 'before-save-hook 'tide-format-before-save)
 
-(add-hook 'javascript-mode-hook #'setup-tide-mode)
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; (add-hook 'javascript-mode-hook #'setup-tide-mode)
+;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 (use-package json-mode
@@ -386,7 +439,49 @@ Return the errors parsed with the error patterns of CHECKER."
   :straight t
   :mode ("\\.yml\\'"))
 
+;; PDF
 
+(use-package pdf-tools
+  :straight t)
+
+;; LSP
+
+(use-package eglot
+  :straight t
+  :hook
+  (javascript-mode . eglot)
+  (before-save . eglot-format))
+
+;; (use-package lsp-mode
+;;   :commands lsp
+;;   :straight t
+;;   :diminish lsp-mode
+;;   :hook
+;;   (elixir-mode . lsp)
+;;   :init
+;;   (add-to-list 'exec-path "./elixir-ls/release"))
+;; optionally
+;; (use-package lsp-ui :straight t :commands lsp-ui-mode)
+;; if you are helm user
+;; (use-package helm-lsp :straight t :commands helm-lsp-workspace-symbol)
+
+;; Elixir
+
+(use-package elixir-mode
+  :straight t
+  :config
+  (add-hook 'elixir-mode-hook
+            (lambda () (add-hook 'before-save-hook 'elixir-format nil t))))
+
+;; lua
+
+(use-package lua-mode
+  :straight t)
+
+
+;; utils
+(use-package ement
+  :straight t)
 
 ;; emacs customize shit
 (custom-set-variables
@@ -395,7 +490,17 @@ Return the errors parsed with the error patterns of CHECKER."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("0c860c4fe9df8cff6484c54d2ae263f19d935e4ff57019999edbda9c7eda50b8" "c801780eac636e6008e6d2c7f871f06eb0a1eceafdb9e8f0334a636532ea78ea" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "8f63230d8e7644d3c2eb29b006a8c241ed854b002430ee36f084d157dd071af7" "b66c341e0d56d7dd165007bb5827efdaed5756d62fb15932aab6b4224e0bb547" default))
+   '("03adef25678d624333371e34ec050db1ad7d13c9db92995df5085ebb82978671" "0c860c4fe9df8cff6484c54d2ae263f19d935e4ff57019999edbda9c7eda50b8" "c801780eac636e6008e6d2c7f871f06eb0a1eceafdb9e8f0334a636532ea78ea" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "8f63230d8e7644d3c2eb29b006a8c241ed854b002430ee36f084d157dd071af7" "b66c341e0d56d7dd165007bb5827efdaed5756d62fb15932aab6b4224e0bb547" default))
+ '(ement-notify-prism-background t)
+ '(ement-room-avatars t)
+ '(ement-room-image-initial-height 0.4)
+ '(ement-room-images t)
+ '(ement-room-message-format-spec "%S%L%B%r%R%t" nil (ement-room))
+ '(ement-room-prism 'both)
+ '(ement-room-retro-messages-number 50)
+ '(ement-room-right-margin-width 10)
+ '(ement-save-sessions t)
+ '(ement-tabulated-room-list-avatars t)
  '(fci-rule-color "#3E4451")
  '(safe-local-variable-values
    '((elisp-lint-indent-specs
@@ -416,11 +521,34 @@ Return the errors parsed with the error patterns of CHECKER."
     [224 108 117]
     [152 195 121]
     [198 120 221]
-    [86 182 194]]))
+    [86 182 194]])
+ '(warning-suppress-log-types
+   '((comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)))
+ '(warning-suppress-types
+   '((comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp)
+     (comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(ement-room-membership ((t (:inherit font-lock-comment-face :height 0.99))))
+ '(ement-room-self ((t (:inherit ement-room-user :weight bold))))
+ '(ement-room-self-message ((t (:foreground "navajo white")))))
 (setq gc-cons-threshold (* 2 1000 1000))

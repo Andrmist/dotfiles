@@ -8,13 +8,18 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# dpi for thinkpad
+#exec "xrandr --dpi 144"
+
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec ~/.screenlayout/standart.sh
-exec_always --no-startup-id "allow_rgb10_configs=false picom --experimental-backends --backend glx --blur-method dual_kawase --blur-strength 1"
+exec_always --no-startup-id "picom"
 #exec_always xrandr --output HDMI-0 --mode 1920x1080 --rate 30 
 exec ~/.config/polybar/launch.sh
 exec --no-startup-id kdeconnect-indicator
 exec "emacs --daemon"
+exec emote
 exec_always "setxkbmap -model pc104 -layout eu,ru,ua -variant ,, -option grp:alt_shift_toggle"
 #exec ~/.config/i3/scripts/discord_autostart.sh
 
@@ -22,7 +27,7 @@ exec_always "setxkbmap -model pc104 -layout eu,ru,ua -variant ,, -option grp:alt
 #exec_always ~/.fehbg
 exec_always nitrogen --restore &
 #exec wal -R
-#exec conky &
+exec conky &
 exec ntfd &
 exec dunst &
 exec birdtray &
@@ -80,10 +85,11 @@ bindsym $mod+Return exec kitty
 bindsym $mod+f fullscreen
 
 # Menus
-bindsym $mod+d exec --no-startup-id "rofi -show combi -theme ~/.config/rofi/chlen.rasi"
+bindsym $mod+d exec --no-startup-id "rofi -dpi -show combi -theme ~/.config/rofi/chlen.rasi"
 
 bindsym $mod+Shift+p exec --no-startup-id "rofi-pass -theme ~/.config/rofi/chlen.rasi"
 bindsym $mod+Control+p exec --no-startup-id "rofi-rbw"
+bindsym $mod+o exec --no-startup-id "rofi -show p -modi p:~/.config/rofi/scripts/rofi-power-menu -theme chlen -font 'JetBrains Mono NF 16' -width 20"
 
 #bindsym mod1+Tab exec --no-startup-id "rofi -kb-accept-entry '!Alt-Tab' -kb-row-down Alt-Tab -show window -theme ~/.config/rofi/chlen.rasi"
 #bindsym mod1+Tab exec --no-startup-id ""
@@ -200,6 +206,10 @@ bindsym $mod+0 workspace $ws10; exec --no-startup-id bash -c "echo other > ~/shi
 
 gaps inner 10
 gaps outer 10
+gaps bottom 40
+smart_borders on
+#gaps inner 0
+#gaps outer 0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -218,8 +228,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+mod2+KP_1 exec firefox
 bindsym $mod+mod2+KP_2 exec codium
 bindsym $mod+mod2+KP_3 exec "emacsclient -c"
-bindsym $mod+mod2+KP_4 exec discord
-bindsym $mod+mod2+KP_5 exec polymc
+bindsym $mod+mod2+KP_4 exec Discord
+bindsym $mod+mod2+KP_5 exec prismlauncher
 bindsym $mod+mod2+KP_6 exec telegram-desktop
 bindsym $mod+mod2+KP_8 exec "firefox -new-window https://music.youtube.com"
 
@@ -263,7 +273,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Cyrillic_ka mode "resize"
 
 # Emoji picker as in windows 10
-bindsym $mod+period exec --no-startup-id emoji-picker
+#bindsym $mod+period exec --no-startup-id emoji-picker
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -289,7 +299,7 @@ bindsym $mod+period exec --no-startup-id emoji-picker
         # # tray_output eDP1
         # tray_output none
 #}
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border none #border pixel 2
 for_window [class="albert"] border none
 # exec_always /home/master/.config/polybar/launch.sh
 
@@ -379,7 +389,6 @@ no_focus [window_type="notification"]
 
 # exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-workspace $ws4 output DP-1
-workspace $ws4 output DP-1 
-workspace $ws4 gaps inner 10
-workspace $ws4 gaps outer 10
+workspace $ws4 output DP-5
+workspace $ws4 output DP-5
+workspace $ws4 gaps outer 0

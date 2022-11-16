@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -15,8 +15,8 @@ export ZSH="/home/master/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="spaceship"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="spaceship"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -125,10 +125,10 @@ export PATH
 
 #Deno
 export DENO_INSTALL="/home/master/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$DENO_INSTALL/bin:/home/master/.cargo/bin:$PATH"
 
 # SSH keychain
-eval `keychain -q --eval id_rsa pufferpanel.key spk.key`
+eval `keychain -q --eval id_rsa pufferpanel.key spk.key kitanit`
 
 nnn_cd()
 {
@@ -176,7 +176,7 @@ alias lst="ls -ahlt"
 alias lastf="ls -ahlt --color=always | head -10"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # pnpm
 export PNPM_HOME="/home/master/.local/share/pnpm"
@@ -192,7 +192,11 @@ alias bun='sde -chip-check-disable -- bun'
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
 # Alias sudo to doas
-alias sudo='doas'
+#alias sudo='doas'
 
 # bun completions
 [ -s "/home/master/.bun/_bun" ] && source "/home/master/.bun/_bun"
+
+# ssh
+
+alias dock='ssh -t root@192.168.1.22 "cd /var/work/docker ; bash --login"'

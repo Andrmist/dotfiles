@@ -1,0 +1,2 @@
+#+TITLE: Polybar bottom bar config
+#+PROPERTY: header-args :comments both :tangle config.ini
