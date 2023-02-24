@@ -26,7 +26,7 @@ I'm a bit exampler, so I will use "example" as our bar name
 #+BEGIN_SRC conf
     [bar/example]
     monitor = ${env:MONITOR:HDMI-0}
-    ; dpi = 144
+    dpi = ${xrdb:Xft.dpi}
     ; override-redirect = true
     width = 100%
     height = 40
@@ -34,6 +34,7 @@ I'm a bit exampler, so I will use "example" as our bar name
     offset-x = 0
     radius = 5.0
     fixed-center = true
+    enable-ipc = true
 
     background = ${colors.background}
     foreground = ${colors.foreground}
@@ -433,15 +434,13 @@ I use Weather icons and "Nerd Font-patched" JetBrainsMono font
 
   [module/battery]
   type = internal/battery
-  battery = BAT1
+  battery = BAT0
   adapter = ADP1
   full-at = 98
 
   format-charging = <animation-charging> <label-charging>
   format-charging-underline = #ffb52a
-
-  format-discharging = <animation-discharging> <label-discharging>
-  format-discharging-underline = ${self.format-charging-underline}
+  format-discharging = <ramp-capacity> <label-discharging>
 
   format-full-prefix = "  "
   format-full-prefix-foreground = ${colors.purple}
@@ -458,11 +457,6 @@ I use Weather icons and "Nerd Font-patched" JetBrainsMono font
   animation-charging-foreground = ${colors.green}
   animation-charging-framerate = 750
 
-  animation-discharging-0 = "  "
-  animation-discharging-1 = "  "
-  animation-discharging-2 = "  "
-  animation-discharging-foreground = ${colors.yellow}
-  animation-discharging-framerate = 750
 
   [module/temperature]
   type = internal/temperature
@@ -499,11 +493,12 @@ I use Weather icons and "Nerd Font-patched" JetBrainsMono font
   margin-bottom = 5
 #+END_SRC
 * Bottom bar
-** TODO Bar
+** DONE Bar
 #+BEGIN_SRC conf
     [bar/bottom]
     monitor = ${env:MONITOR:HDMI-0}
     ; dpi = 144
+    dpi = ${xrdb:Xft.dpi}
     override-redirect = true
     width = 50%
     height = 40
@@ -538,5 +533,5 @@ I use Weather icons and "Nerd Font-patched" JetBrainsMono font
 #+BEGIN_SRC conf
   modules-left  = separator filesystem_root filesystem_d
   modules-center = player
-  modules-right = temperature separator cpu separator memory separator 
+  modules-right = temperature separator cpu separator memory separator battery separator 
 #+END_SRC

@@ -104,18 +104,18 @@
   (my-global-company-mode)
   (setq company-idle-delay 0.0))
 
-(use-package helm
-  :straight t
-  :bind
-  ("M-x" . 'helm-M-x)
-  ("C-x r b" . 'helm-filtered-bookmarks)
-  ("C-x C-f" . 'helm-find-files)
-  ("C-x b" . helm-mini)
-  :config
-  (require 'helm-config)
-  (setq helm-use-frame-when-more-than-two-windows nil)
-  (setq persp-init-new-frame-behaviour-override nil)
-  (helm-mode 1))
+;; (use-package helm
+;;   :straight t
+;;   :bind
+;;   ("M-x" . 'helm-M-x)
+;;   ("C-x r b" . 'helm-filtered-bookmarks)
+;;   ("C-x C-f" . 'helm-find-files)
+;;   ("C-x b" . helm-mini)
+;;   :config
+;;   (require 'helm-config)
+;;   (setq helm-use-frame-when-more-than-two-windows nil)
+;;   (setq persp-init-new-frame-behaviour-override nil)
+;;   (helm-mode 1))
 
 (use-package swiper
   :straight t
@@ -234,11 +234,15 @@
 
 ;; Font and theme settings
 
-(use-package dracula-theme
+(use-package autothemer
   :straight t
-  :init
-  (load-theme 'dracula t))
+  :config
+  (load-theme 'kanagawa))
 
+;; (use-package doom-themes
+;;   :straight t
+;;   :init
+;;   (load-theme 'doom-dracula t))
 ;; (use-package gruvbox-theme
 ;;   :straight t
 ;;   :init
@@ -258,6 +262,10 @@
 (add-to-list 'default-frame-alist '(font . "Iosevka 16"))
 ;; (set-face-attribute 'mode-line nil :font "Fira Code 10")
 
+(when (member "Twitter Color Emoji" (font-family-list))
+  (set-fontset-font
+    t 'symbol (font-spec :family "Twitter Color Emoji") nil 'prepend))
+
 ;; Org-mode settings and packages
 
 (use-package org
@@ -267,6 +275,7 @@
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
 (setq org-log-done nil)
 (setq org-startup-truncated nil)
 
@@ -309,6 +318,37 @@
   (setq org-journal-dir "~/musli_popera/journal/"
 	org-journal-date-format "%A, %d %B %Y"))
 
+(use-package ox-hugo
+  :straight t
+  :after ox)
+
+;; Populates only the EXPORT_FILE_NAME property in the inserted heading.
+(with-eval-after-load 'org-capture
+  (defun org-hugo-new-subtree-post-capture-template ()
+    "Returns `org-capture' template string for new Hugo post.
+See `org-capture-templates' for more information."
+    (let* ((title (read-from-minibuffer "Post Title: ")) ;Prompt to enter the post title
+           (fname (org-hugo-slug title)))
+      (mapconcat #'identity
+                 `(
+                   ,(concat "* TODO " title)
+                   ":PROPERTIES:"
+                   ,(concat ":EXPORT_FILE_NAME: " fname)
+                   ":END:"
+                   "%?\n")          ;Place the cursor here finally
+                 "\n")))
+
+  (add-to-list 'org-capture-templates
+               '("h"                ;`org-capture' binding + h
+                 "Hugo post"
+                 entry
+                 ;; It is assumed that below file is present in `org-directory'
+                 ;; and that it has a "Blog Ideas" heading. It can even be a
+                 ;; symlink pointing to the actual location of all-posts.org!
+                 (file+olp "all-posts.org")
+                 (function org-hugo-new-subtree-post-capture-template))))
+
+
 (add-hook 'org-mode-hook #'(lambda ()
 
                              ;; make the lines in the buffer wrap around the edges of the screen.
@@ -323,15 +363,6 @@
       time-stamp-end "$"
       time-stamp-format "%04Y-%02m-%02d")
 (add-hook 'before-save-hook 'time-stamp nil)
-
-(use-package org-caldav
-  :straight t
-  :config
-  (setq org-caldav-url "https://cal.m0e.space/qugalet"
-	org-caldav-calendar-id "b1ce1e97-36bc-c583-e9fd-a0eec5fb0a0d"
-	org-caldav-inbox "~/musli_popera/tasks.org"
-	org-caldav-files ("~/musli_popera/musli_popera.org" "~/musli_popera/"))
-  )
 
 ;; Python setup
 
@@ -364,7 +395,6 @@ Return the errors parsed with the error patterns of CHECKER."
   (setq company-tooltip-align-annotations t)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1)
-  (tide-hl-identifier-mode +1)
   )
 
 (use-package tide
@@ -420,12 +450,11 @@ Return the errors parsed with the error patterns of CHECKER."
   (add-hook 'rust-mode-hook
             (lambda () (setq indent-tabs-mode nil))))
 
-(use-package racer
+(use-package rustic
   :straight t
   :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode))
+  (setq rustic-analyzer-command '("~/.local/bin/rust-analyzer"))
+  (setq rustic-lsp-client 'eglot))
 
 (use-package flycheck-rust
   :straight t
@@ -450,6 +479,7 @@ Return the errors parsed with the error patterns of CHECKER."
   :straight t
   :hook
   (javascript-mode . eglot)
+  (rust-mode . eglot)
   (before-save . eglot-format))
 
 ;; (use-package lsp-mode
@@ -490,7 +520,7 @@ Return the errors parsed with the error patterns of CHECKER."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("03adef25678d624333371e34ec050db1ad7d13c9db92995df5085ebb82978671" "0c860c4fe9df8cff6484c54d2ae263f19d935e4ff57019999edbda9c7eda50b8" "c801780eac636e6008e6d2c7f871f06eb0a1eceafdb9e8f0334a636532ea78ea" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "8f63230d8e7644d3c2eb29b006a8c241ed854b002430ee36f084d157dd071af7" "b66c341e0d56d7dd165007bb5827efdaed5756d62fb15932aab6b4224e0bb547" default))
+   '("476fe2180054c68863477bd43617e17bb4d10b75e44f6efed146cc55d7b28809" "03adef25678d624333371e34ec050db1ad7d13c9db92995df5085ebb82978671" "0c860c4fe9df8cff6484c54d2ae263f19d935e4ff57019999edbda9c7eda50b8" "c801780eac636e6008e6d2c7f871f06eb0a1eceafdb9e8f0334a636532ea78ea" "7661b762556018a44a29477b84757994d8386d6edee909409fabe0631952dad9" "8f63230d8e7644d3c2eb29b006a8c241ed854b002430ee36f084d157dd071af7" "b66c341e0d56d7dd165007bb5827efdaed5756d62fb15932aab6b4224e0bb547" default))
  '(ement-notify-prism-background t)
  '(ement-room-avatars t)
  '(ement-room-image-initial-height 0.4)

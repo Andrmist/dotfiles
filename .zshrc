@@ -9,13 +9,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 export ZSH="/home/master/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="spaceship"
+ZSH_THEME="candy"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
@@ -78,7 +79,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions poetry)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions poetry node)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -200,3 +201,12 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 # ssh
 
 alias dock='ssh -t root@192.168.1.22 "cd /var/work/docker ; bash --login"'
+#!/bin/bash
+
+#if [[ $TERM -eq "xterm-kitty" ]]
+#then
+#  alias ssh="kitty +kitten ssh"
+#fi
+
+source ~/.cache/wal/colors-tty.sh
+

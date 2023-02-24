@@ -1,0 +1,14 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ '(("bloat.pl.m0e.space"
+  [url-cookie "session" "eyJpZCI6InZ6UGJ2aWZzWXhhRzNSeVBJbUdma09tWSIsInVpZCI6IkFMMWlDbVVXc25UNE9CMDRScyIsImlucyI6InBsLm0wZS5zcGFjZSIsImNpZCI6IkNJUDlrYXJJZjZud0l4YXJ2ajhMZ2ZxS19qYU5ERzQxT29mWEwyY053VzgiLCJjcyI6IlBQZy1WczlQNDlYRnFBX3pSeG9VVmxPb3JFTG10WkwzOUptYnpvdGdsZ2siLCJhdCI6IlptTUc0U1puUElVcVJ0Qnlwa3piLTlwTkxXX19sRjZNR3ExeEd5dmxWd2siLCJjc3JmIjoiRGZuRVFkbS1vVEdkVXBUb0NFSHFHT2N4Iiwic2V0dCI6eyJkdiI6InB1YmxpYyIsImNzIjp0cnVlLCJtbiI6dHJ1ZX19Cg==" "Thu, 18 Jan 2024 17:16:24 GMT" "/" "bloat.pl.m0e.space" nil]))
+)
+(setq url-cookie-secure-storage
+ 'nil)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; End:

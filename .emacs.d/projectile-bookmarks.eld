@@ -1,0 +1,1 @@
+("~/.dotfiles/" "~/work/rpz_blog/" "~/work/uamonitor/" "~/work/personal/" "~/musli_popera/" "~/work/rust_tutor/" "~/work/rpz_blog/themes/congo/" "~/work/rpz_auth/" "~/sources/dwm/" "~/musli_popera/rpz/")
